@@ -1,0 +1,24 @@
+import java.util.ArrayList;
+
+public class Cart {
+	
+	ArrayList<Item> cart;
+	Item list[] = Item.values();
+	
+	public Cart() {
+		cart = new ArrayList<Item>();	
+	}
+	
+	public void addToList(int itemNum) {
+		cart.add(list[itemNum]);
+	}
+	
+	public String toString() {
+		String result = "";
+		for(int i = 0; i < cart.size()-1; i ++) {
+			result += cart.get(i) +", ";
+		}
+		return result + cart.get(cart.size()-1);
+	}
+
+}
