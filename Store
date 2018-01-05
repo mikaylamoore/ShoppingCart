@@ -1,0 +1,71 @@
+import java.util.Scanner;
+
+public class Store {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		printWelcome();
+		Cart c = createCart(sc);
+		printMenu();
+		shop(c, sc);
+	}
+
+	public static void printWelcome() {
+		System.out.println("*****Hello, Welcome to Wal-Mart******");
+		System.out.print("Press 1 to create a new shopping cart: ");
+	}
+
+	public static Cart createCart(Scanner sc) {
+		int input = 0;
+		while (input!=1) {
+			while (!sc.hasNextInt()) {
+				sc.nextLine();
+				System.out.print("\nPlease enter a valid number: ");
+			}
+			input = sc.nextInt();
+			System.out.println();
+			if (input!=1) {
+				System.out.print("Please enter a valid number: ");
+			}
+		}
+		return new Cart();		
+	}
+
+	public static void printMenu() {
+		System.out.println("Please select an item from the following menu.");
+		int index = 0;
+		for(Item n: Item.values()) {
+			System.out.println(index + ". " + n);
+			index ++;
+		}
+	}
+
+	public static int selectItem(Scanner sc) {
+		System.out.print("\nPlease enter item number: ");
+		int itemNum = sc.nextInt();
+		while (itemNum < 0 || itemNum > Item.values().length -1) {
+			System.out.print("\nPlease enter item number: ");
+			itemNum = sc.nextInt();
+		}
+		return itemNum;
+	}
+	public static void shop(Cart c, Scanner sc) {
+		boolean cartFull = false;
+		while(!cartFull) {
+			int itemNum = selectItem(sc); 
+			c.addToList(itemNum);
+			System.out.println("Current Cart: " + c);
+			System.out.print("Would you like to continue? Y/N  ");
+			String input = sc.next();
+			if(input.toUpperCase().equals("Y")) { cartFull= false;}				
+			else { cartFull = true;}
+			// ask for items
+			// add item to list
+			// ask weight
+			// add price
+			// ask for coupon code
+			// Print running total 
+
+		}
+	}
+
+}
